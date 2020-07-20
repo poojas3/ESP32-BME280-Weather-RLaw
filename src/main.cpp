@@ -1,7 +1,9 @@
-// Read values from the sensor and print them in the console.
+// This is the master version of this project
+// This is another test of gits pull
+// this is robbins change
 #include <Arduino.h>
-#include <Adafruit_Sensor.h>
-#include <Adafruit_BME280.h>
+#include "sensor_readings.h"
+#include "settings.h"    // The order is important!
 
 void refresh_readings();  // Declare in the header so that the compiler knows about it before it is called in loop()
 
@@ -13,6 +15,7 @@ void refresh_readings();  // Declare in the header so that the compiler knows ab
 
 // bme is global to this file only
 Adafruit_BME280 bme; // I2C
+Adafruit_BME280 bme;
 
 void setup() {
   pinMode(LED_BUILTIN,OUTPUT);
@@ -23,11 +26,12 @@ void setup() {
   status = bme.begin(0x76);
   if (!status) {
     Serial.println("Could not find a valid BME280 sensor, check wiring!");
-    while (1);
+    while (1);  // Infinite loop
   }
 }
 
 void loop() {
+<<<<<<< HEAD
   refresh_readings();
   delay(4000);
 }
@@ -62,4 +66,8 @@ void refresh_readings() {
   
   digitalWrite(LED_BUILTIN, LOW);
   Serial.println("-----v1-----");   
+=======
+  refresh_readings(bme);  // Passing the bme object to the function as bme is only "global" in this file.
+  delay(2000);
+>>>>>>> 68bdcb933f3d7bf8d3e3b748f0c79047a29b1d52
 }
